@@ -1,49 +1,39 @@
-import { useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
-import TodoList from "./components/TodoList";
-
-var data = [];
+import { useState } from "react";
+import Todolist from "./components/TodoList";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [userData, setUserData] = useState(data);
-  const [clicks, setClicks] = useState(0);
+  const [userInputData, setUserInputData] = useState("");
+  const [userData, setUserData] = useState([]);
 
   function handleChange(event) {
-    setInputValue(event.target.value);
+    setUserInputData(event.target.value);
   }
 
-  const newData = [...data];
   function handleClick() {
-    setClicks(clicks + 1);
-    for (let i = 0; i <= clicks; i++) {
-      newData.push({ newItem: inputValue });
-      setUserData((preData) => [...preData, ...newData]);
-    }
-    console.log(newData);
-    console.log(clicks)
+    setUserData((prevState) => {
+      let copyOfArray = [...prevState, userInputData];
+      return copyOfArray;
+    });
+    setUserInputData("");
   }
 
   function handleDelete(index) {
-    const updatedData = [...newData];
-    updatedData.splice(index, 1);
-    setUserData(updatedData);
+    setUserData((prevState) => {
+      let copyArray = [...prevState];
+      copyArray.splice(index, 1);
+      return copyArray;
+    });
   }
-
-  // if(add===true){
-
-  //    console.log(newData)
-  // }
-
   return (
     <div className="App">
       <TodoItem
-        handleInputChange={handleChange}
-        newInputValue={inputValue}
-        handleClickProp={handleClick}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        userInputData={userInputData}
       />
-      <TodoList userDataProp={userData} handleDeleteProp={handleDelete} />
+      <Todolist userData={userData} handleDelete={handleDelete} />
     </div>
   );
 }

@@ -1,23 +1,17 @@
-
-
-
-export default function TodoList({ userDataProp, handleDeleteProp}){
-    
-    
-    return(
-        <div>
-            <h3>Todo List</h3>
-            
-            {userDataProp.map((object, index)=>
-            <ul key={index}>
-                
-                <li>
-                <input type="checkbox" />
-                    {object.newItem} 
-                    <button onClick={()=>handleDeleteProp(index)} >Delete</button>
-                    </li>
-            </ul>
-            )}
-        </div>
-    )
+export default function Todolist({ userData, handleDelete }) {
+  return (
+    <div>
+      <ul>
+        {userData.map((element, index) => {
+          return (
+            <li key={index}>
+              <input type="checkbox" />
+              {element}{" "}
+              <button onClick={() => handleDelete(index)}>Delete</button>{" "}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }

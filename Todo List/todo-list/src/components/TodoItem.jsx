@@ -1,27 +1,12 @@
-//uplift import useState
-
-import { useState } from "react";
-
-//Array
-
-export default function TodoItem({
-  /*useState()*/
-  handleInputChange,
-  newInputValue,
-  handleClickProp,
-  /*handleChange function
-handleClick function */
-}) {
-  //copy of Array
-  //if condition
-  
+export default function TodoItem({ handleChange, handleClick, userInputData }) {
+  // state uplift
+  //function handleChange
+  //function handleClick
   return (
     <div>
       <label>New Item</label>
-      <p>
-        <input type="text" onChange={handleInputChange} value={newInputValue} />{" "}
-      </p>
-      <button onClick={handleClickProp}>Add</button>
+      <input type="text" onChange={handleChange} value={userInputData} />
+      <button onClick={handleClick}>Add</button>
     </div>
   );
 }
